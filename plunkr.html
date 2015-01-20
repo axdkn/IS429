@@ -58,7 +58,7 @@
 <hr>-->
 
 
-<h3 ng-show="edit">Create New User:</h3>
+<h3 ng-show="edit" id="divDoc">Create New User:</h3>
 <h3 ng-hide="edit">Edit User:</h3>
 
 <form class="form-horizontal">
@@ -101,7 +101,7 @@
 </form>
 
 <hr>
-<button class="btn btn-success" ng-disabled="error || incomplete" ng-click="save($event)">
+<button class="btn btn-success" ng-disabled="error || incomplete" ng-click="save()">
 <span class="glyphicon glyphicon-save"></span>  Save Changes
 </button>
 </div>
@@ -110,7 +110,7 @@
 </div>
 
 <script>
-  /*
+
   function userController($scope) {
     $scope.fName = '';
     $scope.lName = '';
@@ -179,9 +179,7 @@
     }
     
     }
-    */
-    
- 
+
     var myApp = angular.module("myApp", ["firebase"]);
       myApp.controller('userController', ['$scope', '$firebase',
         function($scope, $firebase) {
@@ -190,24 +188,24 @@
           // GET MESSAGES AS AN ARRAY
           $scope.messages = $firebase(ref).$asArray();
           //ADD MESSAGE METHOD
-          $scope.save = function(e) {
+          $scope.addMessage = function(e) {
             //LISTEN FOR RETURN KEY
-            if (e.keyCode === 13) {
+            if (e.keyCode === 13 && $scope.msg) {
               //ALLOW CUSTOM OR ANONYMOUS USER NAMES
               var name = $scope.name || 'anonymous';
               //ADD TO FIREBASE
               $scope.messages.$add({
-                $scope.fname: fname,
-                $scope.lname : lname,
-                $scope.distance : distance,
-                $scope.date : date;
+                fname: fname,
+                lname : lname,
+                distance : distance,
+                date : date;
               });
               //RESET MESSAGE
               $scope.msg = "";
             }
           }
         }
-  
+
       ]);
 </script>
 
