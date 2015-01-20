@@ -3,6 +3,8 @@
 <head>
 <link rel="stylesheet" href = "http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+<script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script>
+<script src="https://cdn.firebase.com/libs/angularfire/0.8.0/angularfire.min.js"></script>
 </head>
 
 <body ng-controller="userController">
@@ -24,7 +26,7 @@
   <tbody>
     <tr ng-repeat="user in users">
       <td>
-        <button class="btn" ng-click="editUser(user.id)">
+        <button class="btn btn-warning" ng-click="editUser(user.id)">
           <span class="glyphicon glyphicon-pencil"></span>  Edit
         </button>
       </td>
@@ -33,7 +35,7 @@
       <td>{{ user.distance }}</td>
       <td>{{ user.date }}</td>
       <td>
-        <button class="btn" ng-click="deleteUser(user.id)">
+        <button class="btn btn-danger" ng-click="deleteUser(user.id)">
           <span class="glyphicon glyphicon-pencil"></span>  Delete
         </button>
       </td>
@@ -154,8 +156,32 @@
     }
     
     }
-  
+    var myApp = angular.module("myApp", ["firebase"]);
+      myApp.controller('MyController', ['$scope', '$firebase',
+        function($scope, $firebase) {
+          //CREATE A FIREBASE REFERENCE
+          var ref = new Firebase("https://bernardfirebase.firebaseio.com/");
+          // GET MESSAGES AS AN ARRAY
+          $scope.messages = $firebase(ref).$asArray();
+          //ADD MESSAGE METHOD
+          $scope.addMessage = function(e) {
+            //LISTEN FOR RETURN KEY
+            if (e.keyCode === 13 && $scope.msg) {
+              //ALLOW CUSTOM OR ANONYMOUS USER NAMES
+              var name = $scope.name || 'anonymous';
+              //ADD TO FIREBASE
+              $scope.messages.$add({
+                from: name,
+                body: $scope.msg
+              });
+              //RESET MESSAGE
+              $scope.msg = "";
+            }
+          }
+        }
+      ]);
 </script>
+
 </body>
 </html>
 
