@@ -44,13 +44,13 @@
 </table>
 
 <hr>
-<button class="btn btn-success" ng-click="editUser('new')">
+<button class="btn btn-success" ng-click="editUser('new')" onclick="<a href="javascript:showElement('divDoc');"">>
 <span class="glyphicon glyphicon-user"></span>  Create New User
 </button>
 <hr>
 
 
-<h3 ng-show="edit">Create New User:</h3>
+<h3 ng-show="edit" id="divDoc">Create New User:</h3>
 <h3 ng-hide="edit">Edit User:</h3>
 
 <form class="form-horizontal">
