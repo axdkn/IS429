@@ -43,11 +43,19 @@
   </tbody>
 </table>
 
-<hr>
-<button class="btn btn-success" ng-click="editUser('new')" onclick=<a href="javascript:showElement('divDoc');">/>
+<div class="panel panel-default">
+  <div class="panel-heading">
+      <h3 class="text-primary text-center">
+          <a class="accordion-toggle" data-toggle="collapse" data-target="#panelOne">Create New Users</a>
+      </h3>
+  </div>
+  <div id="panelOne" class="panel-collapse in">
+      <div class="panel-body">
+<!--<hr>
+<button class="btn btn-success" ng-click="editUser('new')">
 <span class="glyphicon glyphicon-user"></span>  Create New User
 </button>
-<hr>
+<hr>-->
 
 
 <h3 ng-show="edit" id="divDoc">Create New User:</h3>
@@ -84,7 +92,9 @@
 <button class="btn btn-success" ng-disabled="error || incomplete" ng-click="save()">
 <span class="glyphicon glyphicon-save"></span>  Save Changes
 </button>
-
+</div>
+</div>
+</div>
 </div>
 
 <script>
