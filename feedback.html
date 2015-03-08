@@ -164,14 +164,14 @@ Please consider reviewing the applications of:
     
     $scope.currentUser = null;
     //Check to see if the users is already logged in to Firebase and update currentUser if yes. 
-    /*
+
     var authData = ref.getAuth();
       if (authData && authData!={}) {
           $scope.currentUser = $firebase(ref.child("user").child(authData.uid)).$asObject();
       } else {
           console.log("User is logged out");
       }
-    */
+
     $scope.logout = function(loginProvider){
         $scope.currentUser = null;
     }
